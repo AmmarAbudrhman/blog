@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController as ControllersPostController;
 
 Route::get('/', function () {
     
@@ -10,5 +11,5 @@ Route::get('/', function () {
 
 
 
-Route::get('/post', [TestController::class, 'firstAction']);
+Route::get('/post', [PostController::class, 'firstAction']);
 
