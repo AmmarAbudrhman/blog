@@ -8,6 +8,6 @@ class PostController extends Controller
 {
     public function firstAction(): string
     {
-        return "This is the index method of PostController.";
+        return view('post');
     }
 }
