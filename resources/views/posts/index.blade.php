@@ -32,9 +32,9 @@
       <button type="button" class="btn btn-success">Create</button>
 
     </div>
-  </div>
+      </tbody>
   <table class="table mt-4" >
-    <thead>
+      <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
@@ -45,46 +45,22 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>
-          <div class="btn-group" role="group" aria-label="Post actions">
-            <button type="button" class="btn btn-primary btn-sm">View</button>
-            <button type="button" class="btn btn-warning btn-sm">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>
-          <div class="btn-group" role="group" aria-label="Post actions">
-            <button type="button" class="btn btn-primary btn-sm">View</button>
-            <button type="button" class="btn btn-warning btn-sm">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>
-          <div class="btn-group" role="group" aria-label="Post actions">
-            <button type="button" class="btn btn-primary btn-sm">View</button>
-            <button type="button" class="btn btn-warning btn-sm">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+      @foreach ($posts as $post)
+        <tr>
+          <th scope="row">{{ $post['id'] }}</th>
+          <td>{{ $post['title'] }}</td>
+          <td>{{ $post['author'] }}</td>
+          <td>{{ $post['created_at'] }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Post actions">
+              <a href="{{ url('posts/'.$post['id']) }}" class="btn btn-primary btn-sm">View</a>
+              <a href="{{ url('posts/'.$post['id'].'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+              <a href="{{ url(path: 'posts/'.$post['id'].'/delete') }}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+          </td>
+        </tr>
+      @endforeach
+    
   </table>
 
     <!-- Optional JavaScript -->
