@@ -33,4 +33,21 @@ class PostController extends Controller
 
         return view('posts.show', compact('post'));
     }
+    public function edit($id): View
+    {
+        // Placeholder for edit functionality
+        $post = ['id' => $id, 'title' => 'Sample Title', 'author' => 'Sample Author', 'created_at' => '2025-12-01 10:15:00', 'content' => 'Sample content.'];
+
+        return view('posts.edit', compact('post'));
+    }
+    public function delete($id)
+    {
+        // Placeholder for delete functionality
+        return redirect()->route('posts.index')->with('status', 'Post deleted successfully!');
+    }
+    public function update(Request $request, $id)
+    {
+        // Placeholder for update functionality
+        return redirect()->route('posts.index')->with('status', 'Post updated successfully!');
+    }
 }
