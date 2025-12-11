@@ -10,11 +10,5 @@ Route::get('/', function () {
 
 
 
-Route::get('/test', [TestController::class, 'firstAction']);
+Route::get('/post', [TestController::class, 'firstAction']);
 
-
-Route::get('/ammar', function () {
-    $name= "amar";
-     $boooks=['html','Css',"JS"];
-    return view('ammar', compact('name', 'boooks'));
-});
