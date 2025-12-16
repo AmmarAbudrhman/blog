@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController as ControllersPostController;
 
 Route::get('/', function () {
     
@@ -10,11 +11,17 @@ Route::get('/', function () {
 
 
 
-Route::get('/test', [TestController::class, 'firstAction']);
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
 
-Route::get('/ammar', function () {
-    $name= "amar";
-     $boooks=['html','Css',"JS"];
-    return view('ammar', compact('name', 'boooks'));
-});
+
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}/edit',  [PostController::class, 'edit'])->name('posts.edit');
+Route::get('/posts/{id}/delete', [PostController::class, 'delete'])->name('posts.delete');
+Route::put('/posts/{id}/update', [PostController::class, 'update'])->name('posts.update');
+
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+    
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
