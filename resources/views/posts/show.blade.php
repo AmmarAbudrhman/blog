@@ -10,9 +10,9 @@
           {{ data_get($post, 'title', 'Untitled Post') }}
         </div>
         <div class="card-body">
-          <p class="mb-2"><strong>Author:</strong> {{ data_get($post, 'author', 'Unknown author') }}</p>
-          <p class="mb-4"><strong>Created:</strong> {{ data_get($post, 'created_at', 'Not specified') }}</p>
-          <p class="mb-0">{{ data_get($post, 'content', 'No content available for this post.') }}</p>
+          <p class="mb-2"><strong>Title:</strong> {{ $post->Title   }}</p>
+          <p class="mb-4"><strong>Created:</strong> {{ $post->created_at }}</p>
+          <p class="mb-4">{{ $post->description }}</p>
         </div>
       </div>
       <div class="mt-4 d-flex justify-content-between">

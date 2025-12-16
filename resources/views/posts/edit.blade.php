@@ -7,22 +7,17 @@
 		<title>Edit Post</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">Edit Post</a>
-		</nav>
-
+		
 		<div class="container py-5">
 			<div class="row justify-content-center">
 				<div class="col-md-8">
 					<div class="card shadow-sm">
-						<div class="card-header bg-warning text-dark">
-							Update Post
-						</div>
+
 						<div class="card-body">
-							<form method="POST" action="#">
+							<form method="POST" action="{{ route('posts.update', $post['id']) }}">
 								@csrf
 								@method('PUT')
-
+								<input type="hidden" name="id" value="{{ data_get($post, 'id') }}">
 								<div class="form-group">
 									<label for="title">Title</label>
 									<input
@@ -30,30 +25,30 @@
 										class="form-control"
 										id="title"
 										name="title"
-										value="{{ old('title', data_get($post, 'title')) }}"
+										value="{{ $post->Title }}"
 									>
 								</div>
 
 								<div class="form-group">
-									<label for="author">Author</label>
-									<input
-										type="text"
-										class="form-control"
-										id="author"
-										name="author"
-										value="{{ old('author', data_get($post, 'author')) }}"
-									>
-								</div>
-
-								<div class="form-group">
-									<label for="content">Content</label>
+									<label for="description">Description</label>
 									<textarea
 										class="form-control"
-										id="content"
-										name="content"
+										id="description"
+										name="description"
 										rows="6"
-									>{{ old('content', data_get($post, 'content')) }}</textarea>
+									>{{ $post->description }}</textarea>
 								</div>
+
+									<div class="form-group">
+									<label for="post_creator">Post Creator</label>
+									<select class="form-control" id="post_creator" name="post_creator">
+										<option value="">-- Select a creator --</option>
+													
+										@foreach($users as $user)
+										<option @selected($post->user_id==$user->id) value="{{ $user->id }}">{{ $user->name }}</option> 
+										@endforeach
+									</select>
+									</div>
 
 								<div class="d-flex justify-content-between">
 									<a href="{{ url()->previous() }}" class="btn btn-outline-secondary">Cancel</a>

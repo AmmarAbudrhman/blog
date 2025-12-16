@@ -1,11 +1,10 @@
-@extends(view: 'layout.app')
+@extends('layout.app')
 
+@section('title', 'All Posts')
 
-@section(section:'title')
-
-@section(section:'content')
+@section('content')
   <div class="d-flex justify-content-end mb-3">
-    <a href="#" class="btn btn-success">Create</a>
+    <a href="{{ route('posts.create') }}" class="btn btn-success">Create</a>
   </div>
 
   <table class="table mt-4">
@@ -20,16 +19,21 @@
     </thead>
     <tbody>
       @foreach ($posts as $post)
+
         <tr>
-          <th scope="row">{{ $post['id'] }}</th>
-          <td>{{ $post['title'] }}</td>
-          <td>{{ $post['author'] }}</td>
-          <td>{{ $post['created_at'] }}</td>
+          <th scope="row">{{ $post->id}}</th>
+          <td>{{ $post->Title }}</td>
+          <td>{{ $post->user->name ?? 'No Author' }}</td>
+          <td>{{ $post->created_at->format('Y-m-d') }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Post actions">
-              <a href="{{ url('posts/'.$post['id']) }}" class="btn btn-primary btn-sm">View</a>
-              <a href="{{ url('posts/'.$post['id'].'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-              <a href="#" class="btn btn-danger btn-sm">Delete</a>
+              <a href="{{ route('posts.show', $post) }}" class="btn btn-primary btn-sm">View</a>
+              <a href="{{ route('posts.edit', $post) }}" class="btn btn-warning btn-sm">Edit</a>
+              <form action="{{ route('posts.destroy', $post) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
             </div>
           </td>
         </tr>

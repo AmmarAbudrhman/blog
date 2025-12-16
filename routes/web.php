@@ -12,9 +12,16 @@ Route::get('/', function () {
 
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+
+
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}/edit',  [PostController::class, 'edit'])->name('posts.edit');
 Route::get('/posts/{id}/delete', [PostController::class, 'delete'])->name('posts.delete');
-Route::post('/posts/{id}/update', [PostController::class, 'update'])->name('posts.update');
-Route::post('/posts', action: [PostController::class, 'store'])->name('posts.store');
+Route::put('/posts/{id}/update', [PostController::class, 'update'])->name('posts.update');
+
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+    
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
